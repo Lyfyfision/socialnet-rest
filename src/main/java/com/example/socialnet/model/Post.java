@@ -16,11 +16,15 @@ public class Post {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @Column
     private String title;
+
+    @Column
     private String content;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
-    //TODO add images
+    private String imageUrl;
+
 }
