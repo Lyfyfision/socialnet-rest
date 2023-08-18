@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> getUsers() throws Exception {
+    public List<User> getUsers() {
         return repo.findAll();
     }
 
@@ -36,6 +36,8 @@ public class UserServiceImpl implements UserService {
     public boolean alreadyRegistered(String email) {
         return repo.existsByEmail(email);
     }
+
+    //TODO: add custom exception
     static User unwrapUser(Optional<User> entity) throws Exception {
         if (entity.isPresent()) return entity.get();
         else throw new Exception("User not found");
