@@ -1,4 +1,4 @@
-package com.example.socialnet.model;
+package com.example.socialnet.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

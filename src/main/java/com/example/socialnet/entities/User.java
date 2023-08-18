@@ -1,8 +1,7 @@
-package com.example.socialnet.model;
+package com.example.socialnet.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.antlr.v4.runtime.misc.NotNull;
 
 import java.util.List;
 

@@ -1,10 +1,13 @@
 package com.example.socialnet.service;
 
-import com.example.socialnet.model.User;
+import com.example.socialnet.entities.User;
+
+import java.util.List;
 
 public interface UserService {
 
-    String insertUser(User user);
-    String fetchUserToken(String user);
+    User insertUser(User user);
     boolean alreadyRegistered(String email);
+    User getUser(Long id) throws Exception;
+    List<User> getUsers() throws Exception;
 }

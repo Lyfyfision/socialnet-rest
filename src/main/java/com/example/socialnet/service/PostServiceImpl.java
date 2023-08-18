@@ -1,6 +1,6 @@
 package com.example.socialnet.service;
 
-import com.example.socialnet.model.Post;
+import com.example.socialnet.entities.Post;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 

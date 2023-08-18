@@ -1,6 +1,6 @@
 package com.example.socialnet.service;
 
-import com.example.socialnet.model.User;
+import com.example.socialnet.entities.User;
 import com.example.socialnet.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

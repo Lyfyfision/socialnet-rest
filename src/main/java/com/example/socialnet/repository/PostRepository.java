@@ -1,7 +1,7 @@
 package com.example.socialnet.repository;
 
-import com.example.socialnet.model.Post;
-import com.example.socialnet.model.User;
+import com.example.socialnet.entities.Post;
+import com.example.socialnet.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
