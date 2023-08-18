@@ -18,12 +18,11 @@ public class JwtService {
     static final Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
 
     public String getToken(String username) {
-        String token = Jwts.builder()
+        return Jwts.builder()
                 .setSubject(username)
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .signWith(key)
                 .compact();
-        return token;
     }
 
     public String getAuthUser(HttpServletRequest request) {

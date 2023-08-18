@@ -26,7 +26,7 @@ public class SecurityConfig  {
         this.authFilter = authFilter;
     }
 
-    //TODO: add filterChain functionality
+    //TODO: add exc. handling
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
