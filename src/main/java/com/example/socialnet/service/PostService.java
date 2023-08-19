@@ -1,13 +1,18 @@
 package com.example.socialnet.service;
 
 import com.example.socialnet.entities.Post;
-import org.springframework.http.ResponseEntity;
+import com.example.socialnet.entities.User;
+
+import java.util.List;
+import java.util.Optional;
 
 public interface PostService {
 
-    Post CreatePost(Post post, Long userId);
+    Post createPost(Post post, Long userId);
 
-    Post EditPost(Post post);
-
+    Post editPost(Post post);
     void deletePost(Long postId);
+    Post getPost(Long id);
+    List<Post> getAllUserPosts(User user);
+    List<Post> getAllPosts();
 }

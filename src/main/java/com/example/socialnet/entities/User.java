@@ -1,5 +1,6 @@
 package com.example.socialnet.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -17,16 +18,17 @@ public class User {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column
+    @Column(name = "Username")
     @NonNull
     private String username;
 
-    @Column
+    @Column(name = "E-mail")
     @NonNull
     private String email;
 
     @Column
     @NonNull
+    @JsonIgnore
     private String password;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")

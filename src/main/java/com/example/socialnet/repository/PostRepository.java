@@ -12,7 +12,7 @@ import java.util.Optional;
 public interface PostRepository extends JpaRepository<Post, Long> {
 
     Optional<Post> findPostById(Long id);
-    List<Post> findPostsByUser (User user);
+    List<Post> findPostsByUser(User user);
     void createPost (Post post);
     void updatePost (Long id, Post post);
     @Transactional

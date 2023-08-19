@@ -8,12 +8,11 @@ import com.example.socialnet.repository.PostRepository;
 import com.example.socialnet.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
 public class PostServiceImpl implements PostService {
-
-
     private final PostRepository postRepository;
     private final UserRepository userRepository;
 
@@ -23,7 +22,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public Post CreatePost(Post post, Long userId) {
+    public Post createPost(Post post, Long userId) {
         Optional<User> user = userRepository.findById(userId);
         if (user.isPresent()) {
             post.setUser(user.get());
@@ -34,7 +33,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public Post EditPost(Post post) {
+    public Post editPost(Post post) {
         return postRepository.findById(post.getId()).map(updatedPost -> {
             updatedPost.setTitle(post.getTitle());
             updatedPost.setContent(post.getContent());
@@ -45,5 +44,25 @@ public class PostServiceImpl implements PostService {
     @Override
     public void deletePost(Long postId) {
         postRepository.deletePostById(postId);
+    }
+
+    @Override
+    public Post getPost(Long id) {
+        Optional<Post> post = postRepository.findPostById(id);
+        return unwrapPost(post, id);
+    }
+
+    @Override
+    public List<Post> getAllUserPosts(User user) {
+        return postRepository.findPostsByUser(user);
+    }
+
+    @Override
+    public List<Post> getAllPosts() {
+        return postRepository.findAll();
+    }
+    static Post unwrapPost(Optional<Post> entity, Long postId) {
+        if(entity.isPresent()) return entity.get();
+        else throw new PostNotFoundException(postId);
     }
 }

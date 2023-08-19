@@ -19,9 +19,7 @@ import java.util.Arrays;
 @EnableWebSecurity
 @Configuration
 public class SecurityConfig  {
-
     private final AuthFilter authFilter;
-
     public SecurityConfig(AuthFilter authFilter) {
         this.authFilter = authFilter;
     }
