@@ -9,7 +9,6 @@ import java.util.Optional;
 public interface PostService {
 
     Post createPost(Post post, Long userId);
-
     Post editPost(Post post);
     void deletePost(Long postId);
     Post getPost(Long id);

@@ -9,5 +9,6 @@ public interface UserService {
     User insertUser(User user);
     boolean alreadyRegistered(String email);
     User getUser(Long id) throws Exception;
+    User getUser(String username) throws Exception;
     List<User> getUsers();
 }

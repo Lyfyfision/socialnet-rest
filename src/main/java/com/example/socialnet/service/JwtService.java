@@ -10,17 +10,18 @@ import org.springframework.stereotype.Component;
 import java.security.Key;
 import java.util.Date;
 
+import static com.example.socialnet.security.SecurityConstants.PREFIX;
+import static com.example.socialnet.security.SecurityConstants.TOKEN_EXPIRATION_TIME;
+
 @Component
 public class JwtService {
 
-    public static final long EXPIRATION_TIME = 86_400_000;
-    public static final String PREFIX = "Bearer";
     static final Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
 
     public String getToken(String username) {
         return Jwts.builder()
                 .setSubject(username)
-                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
+                .setExpiration(new Date(System.currentTimeMillis() + TOKEN_EXPIRATION_TIME))
                 .signWith(key)
                 .compact();
     }

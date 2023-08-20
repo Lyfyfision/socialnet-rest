@@ -1,15 +1,10 @@
 package com.example.socialnet.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
 
-@Getter
-@Setter
-@AllArgsConstructor
-public class UserCredentials {
-
-    private String username;
-    private String password;
-
+public enum UserCredentials implements GrantedAuthority {
+    ROLE_ADMIN, ROLE_USER;
+    public String getAuthority() {
+        return name();
+    }
 }

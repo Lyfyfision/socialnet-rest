@@ -1,6 +1,7 @@
 package com.example.socialnet.service;
 
 import com.example.socialnet.entities.User;
+import com.example.socialnet.exceptions.EntityNotFoundException;
 import com.example.socialnet.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
@@ -17,9 +18,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUser(Long id) throws Exception {
+    public User getUser(Long id) {
         Optional<User> user = repo.findById(id);
-        return unwrapUser(user);
+        return unwrapUser(user, id);
+    }
+
+    @Override
+    public User getUser(String username) {
+        Optional<User> user = repo.findByUsername(username);
+        return unwrapUser(user, 404L);
     }
 
     @Override
@@ -37,9 +44,8 @@ public class UserServiceImpl implements UserService {
         return repo.existsByEmail(email);
     }
 
-    //TODO: add custom exception
-    static User unwrapUser(Optional<User> entity) throws Exception {
+    static User unwrapUser(Optional<User> entity, Long id) {
         if (entity.isPresent()) return entity.get();
-        else throw new Exception("User not found");
+        else throw new EntityNotFoundException(id, User.class);
     }
 }

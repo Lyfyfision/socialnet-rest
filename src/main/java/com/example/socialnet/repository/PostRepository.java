@@ -10,11 +10,8 @@ import java.util.List;
 import java.util.Optional;
 @RepositoryRestResource
 public interface PostRepository extends JpaRepository<Post, Long> {
-
     Optional<Post> findPostById(Long id);
     List<Post> findPostsByUser(User user);
-    void createPost (Post post);
-    void updatePost (Long id, Post post);
     @Transactional
     void deletePostById (Long postId);
 
