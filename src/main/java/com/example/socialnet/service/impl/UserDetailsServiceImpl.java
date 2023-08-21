@@ -1,4 +1,4 @@
-package com.example.socialnet.service;
+package com.example.socialnet.service.impl;
 
 import com.example.socialnet.entities.User;
 import com.example.socialnet.repository.UserRepository;

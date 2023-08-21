@@ -1,8 +1,7 @@
 package com.example.socialnet.controllers;
 
 import com.example.socialnet.entities.User;
-import com.example.socialnet.service.UserServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.socialnet.service.impl.UserServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,8 +28,9 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    //TODO: add login call
     @PostMapping("/login")
     public ResponseEntity<?> login() {
-
+        return null;
     }
 }

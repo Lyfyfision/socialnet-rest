@@ -1,8 +1,9 @@
-package com.example.socialnet.service;
+package com.example.socialnet.service.impl;
 
 import com.example.socialnet.entities.User;
 import com.example.socialnet.exceptions.EntityNotFoundException;
 import com.example.socialnet.repository.UserRepository;
+import com.example.socialnet.service.UserService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -1,9 +1,8 @@
 package com.example.socialnet.security.manager;
 
 import com.example.socialnet.entities.User;
-import com.example.socialnet.service.UserServiceImpl;
+import com.example.socialnet.service.impl.UserServiceImpl;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

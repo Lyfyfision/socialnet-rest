@@ -1,4 +1,4 @@
-package com.example.socialnet.service;
+package com.example.socialnet.service.impl;
 
 import com.example.socialnet.entities.Post;
 import com.example.socialnet.entities.User;
@@ -6,6 +6,7 @@ import com.example.socialnet.exceptions.PostNotFoundException;
 import com.example.socialnet.exceptions.UserNotFoundException;
 import com.example.socialnet.repository.PostRepository;
 import com.example.socialnet.repository.UserRepository;
+import com.example.socialnet.service.PostService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
