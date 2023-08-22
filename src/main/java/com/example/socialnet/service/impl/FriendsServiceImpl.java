@@ -7,8 +7,6 @@ import java.util.List;
 
 public class FriendsServiceImpl implements FriendService {
 
-
-
     @Override
     public void sendRequest(String sender_email, String recipient_email) {
 

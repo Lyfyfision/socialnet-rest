@@ -1,14 +1,24 @@
 package com.example.socialnet.entities;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+import java.io.Serial;
 import java.io.Serializable;
+//TODO: is serialization needed?
 
 @Entity
 @Table(name = "friendships")
-@Data
+@NoArgsConstructor
+@Getter
+@Setter
 public class Friendship implements Serializable {
+
+    @Serial
+    private static final Long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "friendship_id", nullable = false)
@@ -28,5 +38,10 @@ public class Friendship implements Serializable {
     @PrePersist
     public void setUpStatus() {
         this.isFriend = false;
+    }
+
+    public Friendship(User userSender, User userReceiver) {
+        this.userSender = userSender;
+        this.userReceiver = userReceiver;
     }
 }

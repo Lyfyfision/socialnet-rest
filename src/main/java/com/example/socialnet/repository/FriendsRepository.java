@@ -1,12 +1,13 @@
 package com.example.socialnet.repository;
 
-import com.example.socialnet.entities.User;
+import com.example.socialnet.entities.Friendship;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import java.sql.SQLException;
-import java.util.Collection;
-import java.util.List;
+import java.util.Optional;
 
-public interface FriendsRepository extends JpaRepository<User, Long> {
+@Repository
+public interface FriendsRepository extends JpaRepository<Friendship, Long> {
+    Optional<Friendship> findByUserSenderIdAndUserReceiverId(Long senderId, Long receiverId);
 
 }
