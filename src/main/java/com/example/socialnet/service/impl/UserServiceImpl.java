@@ -48,6 +48,7 @@ public class UserServiceImpl implements UserService {
         return repo.existsByEmail(email);
     }
 
+    //TODO: examine unwrap method
     static User unwrapUser(Optional<User> entity) {
         if (entity.isPresent()) return entity.get();
         else throw new RuntimeException();
