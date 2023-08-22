@@ -8,6 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface FollowershipRepository extends JpaRepository<Followership, Long> {
-
     Optional<Followership> findFollowershipByUserCheckedIdAndFollowerId(Long userChecked_id, Long follower_id);
 }
