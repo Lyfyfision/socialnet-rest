@@ -13,5 +13,6 @@ import java.util.List;
 public class UserDto implements Serializable {
     private final Long id;
     private final String username;
+    private final String email;
     private final List<Post> posts;
 }

@@ -28,11 +28,11 @@ import static com.example.socialnet.security.SecurityConstants.REGISTER_PATH;
 public class SecurityConfig  {
     private final JwtAuthorizationFilter jwtAuthFilter;
     private final AuthEntryPoint authEntryPoint;
-    private final CustomAuthenticationManager authenticationManager;
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        AuthenticationFilter authenticationFilter = new AuthenticationFilter(authenticationManager);
-        authenticationFilter.setFilterProcessesUrl("/authenticate");
+//        AuthenticationFilter authenticationFilter = new AuthenticationFilter(authenticationManager);
+//        authenticationFilter.setFilterProcessesUrl("/authenticate");
         return http
                 .csrf(csrf -> csrf.disable())
                 .cors(cors -> cors.configurationSource(corsConfiguration()))

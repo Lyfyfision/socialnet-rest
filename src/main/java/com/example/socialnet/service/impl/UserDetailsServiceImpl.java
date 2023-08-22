@@ -13,8 +13,7 @@ import java.util.Optional;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    final
-    UserRepository userRepo;
+    private final UserRepository userRepo;
 
     public UserDetailsServiceImpl(UserRepository userRepo) {
         this.userRepo = userRepo;

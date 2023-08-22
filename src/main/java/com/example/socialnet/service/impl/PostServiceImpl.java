@@ -7,20 +7,17 @@ import com.example.socialnet.exceptions.UserNotFoundException;
 import com.example.socialnet.repository.PostRepository;
 import com.example.socialnet.repository.UserRepository;
 import com.example.socialnet.service.PostService;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class PostServiceImpl implements PostService {
     private final PostRepository postRepository;
     private final UserRepository userRepository;
-
-    public PostServiceImpl(PostRepository postRepository, UserRepository userRepository) {
-        this.postRepository = postRepository;
-        this.userRepository = userRepository;
-    }
 
     @Override
     public Post createPost(Post post, Long userId) {
@@ -48,14 +45,14 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public Post getPost(Long id) {
+    public Post getPostById(Long id) {
         Optional<Post> post = postRepository.findPostById(id);
         return unwrapPost(post, id);
     }
 
     @Override
-    public List<Post> getAllUserPosts(User user) {
-        return postRepository.findPostsByUser(user);
+    public List<Post> getAllUserPosts(String email) {
+        return postRepository.findPostsByUserEmail(email);
     }
 
     @Override
