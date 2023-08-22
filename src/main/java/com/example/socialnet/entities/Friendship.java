@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import java.io.Serial;
 import java.io.Serializable;
+
 //TODO: is serialization needed?
 
 @Entity
