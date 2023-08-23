@@ -3,23 +3,22 @@ package com.example.socialnet.service.impl;
 import com.example.socialnet.entities.User;
 import com.example.socialnet.repository.UserRepository;
 import com.example.socialnet.service.UserService;
+import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class UserServiceImpl implements UserService {
 
     private final UserRepository repo;
 
     private final BCryptPasswordEncoder encoder;
 
-    public UserServiceImpl(UserRepository repo, BCryptPasswordEncoder encoder) {
-        this.repo = repo;
-        this.encoder = encoder;
-    }
 
     @Override
     public User getUser(Long id) {
@@ -28,8 +27,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> getUser(String username) {
-        return repo.findByUsername(username);
+    public User getUser(String username) {
+        Optional<User> user = repo.findByUsername(username);
+        return unwrapUser(user);
     }
 
     @Override
@@ -49,8 +49,9 @@ public class UserServiceImpl implements UserService {
     }
 
     //TODO: examine unwrap method
+
     static User unwrapUser(Optional<User> entity) {
         if (entity.isPresent()) return entity.get();
-        else throw new RuntimeException();
+        else throw new NoSuchElementException();
     }
 }

@@ -26,13 +26,13 @@ import static com.example.socialnet.security.SecurityConstants.REGISTER_PATH;
 @Configuration
 @AllArgsConstructor
 public class SecurityConfig  {
-    private final JwtAuthorizationFilter jwtAuthFilter;
     private final AuthEntryPoint authEntryPoint;
+    private final CustomAuthenticationManager manager;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-//        AuthenticationFilter authenticationFilter = new AuthenticationFilter(authenticationManager);
-//        authenticationFilter.setFilterProcessesUrl("/authenticate");
+        AuthenticationFilter authenticationFilter = new AuthenticationFilter(manager);
+        authenticationFilter.setFilterProcessesUrl("/authenticate");
         return http
                 .csrf(csrf -> csrf.disable())
                 .cors(cors -> cors.configurationSource(corsConfiguration()))
@@ -41,12 +41,9 @@ public class SecurityConfig  {
                         .anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .exceptionHandling(exc -> exc.authenticationEntryPoint(authEntryPoint))
-                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
+                .addFilter(authenticationFilter)
+                .addFilterAfter(new JwtAuthorizationFilter(), AuthenticationFilter.class)
                 .build();
-    }
-    @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
     }
     @Bean
     public CorsConfigurationSource corsConfiguration() {
@@ -60,5 +57,4 @@ public class SecurityConfig  {
         source.registerCorsConfiguration("/**", config);
         return source;
     }
-
 }

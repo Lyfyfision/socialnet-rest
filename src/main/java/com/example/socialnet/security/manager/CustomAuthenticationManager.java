@@ -11,7 +11,6 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import java.util.Optional;
 
 @Component
 @AllArgsConstructor
@@ -21,8 +20,8 @@ public class CustomAuthenticationManager implements AuthenticationManager {
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-        Optional<User> user = userService.getUser(authentication.getName());
-        if (!passwordEncoder.matches(authentication.getCredentials().toString(), user.get().getPassword())) {
+       User user = userService.getUser(authentication.getName());
+        if (!passwordEncoder.matches(authentication.getCredentials().toString(), user.getPassword())) {
             throw new BadCredentialsException("Incorrect password");
         }
         return new UsernamePasswordAuthenticationToken(authentication.getName(), user.getPassword());

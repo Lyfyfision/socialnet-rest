@@ -1,32 +1,39 @@
 package com.example.socialnet.security.filters;
 
-import com.example.socialnet.service.JwtService;
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.example.socialnet.security.SecurityConstants;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
-@AllArgsConstructor
-@Component
+import java.util.Arrays;
+
+
 public class JwtAuthorizationFilter extends OncePerRequestFilter {
-    private final JwtService jwtService;
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
-            throws ServletException, IOException {
-        String jws = request.getHeader("Authorization");
-        if (jws != null) {
-            String user = jwtService.getAuthUser(request);
-            Authentication authentication =
-                    new UsernamePasswordAuthenticationToken(user, null, java.util.Collections.emptyList());
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        String header = request.getHeader("Authorization");
+
+        if (header == null || !header.startsWith(SecurityConstants.PREFIX)) {
+            filterChain.doFilter(request, response);
+            return;
         }
+
+        String token = header.replace(SecurityConstants.PREFIX, "");
+        String user = JWT.require(Algorithm.HMAC512(SecurityConstants.SECRET_KEY))
+                .build()
+                .verify(token)
+                .getSubject();
+
+        Authentication authentication = new UsernamePasswordAuthenticationToken(user, null, Arrays.asList());
+        SecurityContextHolder.getContext().setAuthentication(authentication);
         filterChain.doFilter(request, response);
     }
 }

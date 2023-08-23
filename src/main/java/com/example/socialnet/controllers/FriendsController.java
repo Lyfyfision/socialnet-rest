@@ -1,6 +1,7 @@
 package com.example.socialnet.controllers;
 
 import com.example.socialnet.entities.Friendship;
+import com.example.socialnet.entities.User;
 import com.example.socialnet.service.impl.FollowershipServiceImpl;
 import com.example.socialnet.service.impl.FriendshipServiceImpl;
 import com.example.socialnet.service.impl.UserServiceImpl;
@@ -8,8 +9,10 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 //TODO: FriendsController logic
@@ -42,7 +45,7 @@ public class FriendsController {
     }
     @GetMapping
     public List<Friendship> getAllFriendship(@PathVariable Long user_id) {
-
+        return null;
     }
 
 }
