@@ -31,7 +31,7 @@ public class AuthController {
             UsernamePasswordAuthenticationToken creds = new UsernamePasswordAuthenticationToken(
                     authRequest.getUsername(), authRequest.getPassword());
             Authentication auth = authenticationManager.authenticate(creds);
-            auth.setAuthenticated(true);
+
             return new ResponseEntity<>(HttpStatus.OK);
         }
     }
