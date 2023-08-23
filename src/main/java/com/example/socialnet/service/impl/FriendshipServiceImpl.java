@@ -39,4 +39,9 @@ public class FriendshipServiceImpl implements FriendshipService {
     public Friendship findById(Long id) {
         return friendsRepo.findById(id).orElse(null);
     }
+
+    @Override
+    public void acceptFriendship(Friendship friendship) {
+        friendsRepo.updateStatus(friendship.getFriendshipId(), true);
+    }
 }

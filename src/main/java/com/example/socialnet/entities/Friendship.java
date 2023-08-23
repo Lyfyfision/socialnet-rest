@@ -34,11 +34,11 @@ public class Friendship implements Serializable {
     private User userReceiver;
 
     @Column(columnDefinition = "BOOLEAN", nullable = false)
-    private boolean isFriend;
+    private boolean isFriends;
 
     @PrePersist
     public void setUpStatus() {
-        this.isFriend = false;
+        this.isFriends = false;
     }
 
     public Friendship(User userSender, User userReceiver) {

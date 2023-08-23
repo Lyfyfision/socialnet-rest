@@ -10,4 +10,5 @@ public interface FriendshipService {
     Friendship save(Friendship entity);
     List<Friendship> toList();
     Optional<Friendship> getByUsers(Long userSenderId, Long userReceiverId);
+    void acceptFriendship(Friendship friendship);
 }
