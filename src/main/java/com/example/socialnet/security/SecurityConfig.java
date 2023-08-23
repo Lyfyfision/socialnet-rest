@@ -2,7 +2,7 @@ package com.example.socialnet.security;
 
 import com.example.socialnet.security.filters.JwtAuthorizationFilter;
 import com.example.socialnet.security.manager.CustomAuthenticationManager;
-import lombok.AllArgsConstructor;
+import lombok.Setter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -12,7 +12,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import com.example.socialnet.security.filters.AuthenticationFilter;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -24,10 +23,10 @@ import static com.example.socialnet.security.SecurityConstants.REGISTER_PATH;
 
 @EnableWebSecurity
 @Configuration
-@AllArgsConstructor
+@Setter
 public class SecurityConfig  {
-    private final AuthEntryPoint authEntryPoint;
-    private final CustomAuthenticationManager manager;
+    private AuthEntryPoint authEntryPoint;
+    private CustomAuthenticationManager manager;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -57,4 +56,5 @@ public class SecurityConfig  {
         source.registerCorsConfiguration("/**", config);
         return source;
     }
+
 }

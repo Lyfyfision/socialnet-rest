@@ -3,7 +3,8 @@ package com.example.socialnet.service.impl;
 import com.example.socialnet.entities.User;
 import com.example.socialnet.repository.UserRepository;
 import com.example.socialnet.service.UserService;
-import lombok.AllArgsConstructor;
+import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -12,13 +13,11 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
-@AllArgsConstructor
 public class UserServiceImpl implements UserService {
-
-    private final UserRepository repo;
-
-    private final BCryptPasswordEncoder encoder;
-
+    @Autowired
+    private UserRepository repo;
+    @Autowired
+    private BCryptPasswordEncoder encoder;
 
     @Override
     public User getUser(Long id) {

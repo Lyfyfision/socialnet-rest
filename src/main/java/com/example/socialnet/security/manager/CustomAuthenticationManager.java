@@ -3,6 +3,7 @@ package com.example.socialnet.security.manager;
 import com.example.socialnet.entities.User;
 import com.example.socialnet.service.impl.UserServiceImpl;
 import lombok.AllArgsConstructor;
+import lombok.Setter;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -13,10 +14,10 @@ import org.springframework.stereotype.Component;
 
 
 @Component
-@AllArgsConstructor
+@Setter
 public class CustomAuthenticationManager implements AuthenticationManager {
-    private final UserServiceImpl userService;
-    private final BCryptPasswordEncoder passwordEncoder;
+    private UserServiceImpl userService;
+    private BCryptPasswordEncoder passwordEncoder;
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {

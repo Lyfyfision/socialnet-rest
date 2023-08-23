@@ -11,11 +11,11 @@ import java.util.Set;
 /**
  * Represent User entity, including lists of friend and followers.
  */
-@RequiredArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 @Entity
-@Table(name = "users")
+@Table
 public class User {
 
     @Id
@@ -36,8 +36,8 @@ public class User {
     @NotBlank
     private String password;
 
-    @Column(name = "is_checked", nullable = false, columnDefinition = "BOOLEAN")
-    private Boolean isChecked;
+    @Column(name = "is_checked")
+    private boolean isChecked;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     @JsonIgnore
@@ -58,10 +58,14 @@ public class User {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "userSender")
     @JsonIgnore
     private List<Friendship> friendshipsSent;
-
-    public User(String username, String email, String password) {
+    @PrePersist
+    public void setUp() {
+        this.isChecked = false;
+    }
+    public User(String username, String email, String password, boolean isChecked) {
         this.username = username;
         this.email = email;
         this.password = password;
+        this.isChecked = isChecked;
     }
 }
