@@ -1,11 +1,11 @@
 package pojo;
 
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class AuthRequest {
 
     @NonNull

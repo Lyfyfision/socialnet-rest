@@ -1,10 +1,12 @@
 package com.example.socialnet.controllers;
 
 import com.example.socialnet.entities.User;
+import com.example.socialnet.security.SecurityConstants;
 import com.example.socialnet.security.manager.CustomAuthenticationManager;
 import com.example.socialnet.service.impl.UserServiceImpl;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -27,12 +29,13 @@ public class AuthController {
     //TODO: examine login call (error after unwrap User)
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@Valid @RequestBody AuthRequest authRequest) {
+    public ResponseEntity<?> login(@RequestBody AuthRequest authRequest) {
             UsernamePasswordAuthenticationToken creds = new UsernamePasswordAuthenticationToken(
                     authRequest.getUsername(), authRequest.getPassword());
             Authentication auth = authenticationManager.authenticate(creds);
-
-            return new ResponseEntity<>(HttpStatus.OK);
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.AUTHORIZATION, SecurityConstants.PREFIX)
+                    .build();
         }
     }
 

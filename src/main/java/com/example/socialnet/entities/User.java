@@ -12,6 +12,7 @@ import java.util.Set;
  * Represent User entity, including lists of friend and followers.
  */
 @NoArgsConstructor
+@RequiredArgsConstructor
 @Getter
 @Setter
 @Entity
@@ -25,15 +26,18 @@ public class User {
 
     @Column(name = "username", unique = true, nullable = false)
     @NotBlank
+    @NonNull
     private String username;
 
     @Column(name = "e-mail", unique = true, nullable = false)
     @NotBlank
     @Email
+    @NonNull
     private String email;
 
     @Column(name = "password", nullable = false)
     @NotBlank
+    @NonNull
     private String password;
 
     @Column(name = "is_checked")

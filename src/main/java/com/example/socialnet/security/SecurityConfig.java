@@ -3,13 +3,13 @@ package com.example.socialnet.security;
 import com.example.socialnet.security.filters.JwtAuthorizationFilter;
 import com.example.socialnet.security.manager.CustomAuthenticationManager;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import com.example.socialnet.security.filters.AuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
@@ -23,15 +23,17 @@ import static com.example.socialnet.security.SecurityConstants.REGISTER_PATH;
 
 @EnableWebSecurity
 @Configuration
-@Setter
 public class SecurityConfig  {
+    @Autowired
     private AuthEntryPoint authEntryPoint;
+    @Autowired
     private CustomAuthenticationManager manager;
+    @Setter
+    private  AuthenticationFilter authFilter;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        AuthenticationFilter authenticationFilter = new AuthenticationFilter(manager);
-        authenticationFilter.setFilterProcessesUrl("/authenticate");
+        authFilter = new AuthenticationFilter(manager);
         return http
                 .csrf(csrf -> csrf.disable())
                 .cors(cors -> cors.configurationSource(corsConfiguration()))
@@ -40,7 +42,7 @@ public class SecurityConfig  {
                         .anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .exceptionHandling(exc -> exc.authenticationEntryPoint(authEntryPoint))
-                .addFilter(authenticationFilter)
+                .addFilter(authFilter)
                 .addFilterAfter(new JwtAuthorizationFilter(), AuthenticationFilter.class)
                 .build();
     }

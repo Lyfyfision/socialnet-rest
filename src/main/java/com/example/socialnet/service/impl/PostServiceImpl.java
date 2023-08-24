@@ -20,13 +20,7 @@ public class PostServiceImpl implements PostService {
     private final UserRepository userRepository;
 
     @Override
-    public Post createPost(Post post, Long userId) {
-        Optional<User> user = userRepository.findById(userId);
-        if (user.isPresent()) {
-            post.setUser(user.get());
-        } else {
-            throw new UserNotFoundException(userId);
-        }
+    public Post createPost(Post post) {
         return postRepository.save(post);
     }
 
