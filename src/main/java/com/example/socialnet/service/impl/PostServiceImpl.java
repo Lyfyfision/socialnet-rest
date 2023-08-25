@@ -20,7 +20,8 @@ public class PostServiceImpl implements PostService {
     private final UserRepository userRepository;
 
     @Override
-    public Post createPost(Post post) {
+    public Post createPost(Post post, Long userId) {
+        post.setUser(UserServiceImpl.unwrapUser(userRepository.findById(userId)));
         return postRepository.save(post);
     }
 
